@@ -4,22 +4,38 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Sal’s Strawberry Saloon</title>
-  <link rel="stylesheet" href="style.css" />
-  <script type="module" src="./main.mjs"></script>
+  <link rel="stylesheet" href="./css/style.css"/>
+
+
+  <!-- firebase start ****************************************-->
+  <!-- Firebase App (core Firebase SDK) is always required & must be listed 1st -->
+  <script src="https://www.gstatic.com/firebasejs/8.1.2/firebase-app.js"></script>
+  <!-- Add Firebase products that you want to use -->
+  <script src="https://www.gstatic.com/firebasejs/8.1.2/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.1.2/firebase-database.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.1.2/firebase-analytics.js"></script>
+  <!-- firebase end ******************************************-->
+  <script src="./scripts/firebase/fb_init.js"></script>
+  <script src="./scripts/firebase/fb_io.js"></script>
+  <script src="./scripts/firebase/fb_login.js"></script>
+  <script src="./scripts/core/form.js"></script>
+
+
+  <script src="./scripts/core/main.js"></script>
 </head>
 <body>
-  <div class="container">
+  <div class="container" id="delete_on_submit">
     <h1>Sal’s Strawberry Saloon</h1>
     <h2>(and other fruit products)</h2>
 
-    <button onclick="fb_authenticate()">Login with Google</button>
+    <button onclick="fb_login()">Login with Google</button>
 
     <form id="fruitForm">
       <label for="name">Your Name:</label>
       <input type="text" id="name" name="name" required />
 
-      <label for="favoriteFruit">Favorite Fruit:</label>
-      <input type="text" id="favoriteFruit" name="favoriteFruit" required />
+      <label for="favouriteFruit">Favorite Fruit:</label>
+      <input type="text" id="favouriteFruit" name="favouriteFruit" required />
 
       <label for="fruitQuantity">How many servings per week?</label>
       <input type="number" id="fruitQuantity" name="fruitQuantity" required />
@@ -27,9 +43,12 @@
       <!-- add more fields here -->
     </form>
 
-    <button onclick="fb_write()">Submit</button>
+    <button onclick="submit()">Submit</button>
 
     <p id="statusMessage"></p>
+  </div>
+  <div class="container" id="thanks_for_answering">
+
   </div>
 </body>
 </html>
