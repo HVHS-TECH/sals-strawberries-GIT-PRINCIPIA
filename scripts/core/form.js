@@ -10,9 +10,10 @@ var init = false;
 //submit()
 function submit() {
     var formdata = getFormData();
-    fb_write("sals-strawberries/formdata/" + username + "/", '', formdata.name);
-    fb_write("sals-strawberries/formdata/" + username + "/", '', formdata.favFruit);
-    fb_write("sals-strawberries/formdata/" + username + "/", '', formdata.fruitQnty);
+    fb_write("sals-strawberries/formdata/" + username + "/email", '', email);
+    fb_write("sals-strawberries/formdata/" + username + "/name", '', formdata.name);
+    fb_write("sals-strawberries/formdata/" + username + "/favFruit", '', formdata.favFruit);
+    fb_write("sals-strawberries/formdata/" + username + "/fruitQnty", '', formdata.fruitQnty);
 }
 //------------------------------------------------------------------------------//
 
