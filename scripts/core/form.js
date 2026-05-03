@@ -8,12 +8,23 @@ var init = false;
 
 //------------------------------------------------------------------------------//
 //submit()
+//submit the form data
 function submit() {
     var formdata = getFormData();
-    fb_write("sals-strawberries/formdata/" + username + "/email", '', email);
-    fb_write("sals-strawberries/formdata/" + username + "/name", '', formdata.name);
-    fb_write("sals-strawberries/formdata/" + username + "/favFruit", '', formdata.favFruit);
-    fb_write("sals-strawberries/formdata/" + username + "/fruitQnty", '', formdata.fruitQnty);
+    if (uid == null) return;
+    if (email == null || formdata.name == "" || formdata.favFruit == "" || formdata.fruitQnty == "") return;
+    fb_write("sals-strawberries/formdata/" + uid + "/email", '', email);
+    fb_write("sals-strawberries/formdata/" + uid + "/name", '', formdata.name);
+    fb_write("sals-strawberries/formdata/" + uid + "/favFruit", '', formdata.favFruit);
+    fb_write("sals-strawberries/formdata/" + uid + "/fruitQnty", '', formdata.fruitQnty);
+
+    var html_thanks_for_answering = document.getElementById("thanks_for_answering");
+    var html_delete_on_submit = document.getElementById("delete_on_submit");
+
+    html_delete_on_submit.remove();
+
+    html_thanks_for_answering.style.display = "flex";
+
 }
 //------------------------------------------------------------------------------//
 

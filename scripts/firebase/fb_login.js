@@ -3,6 +3,7 @@
 var login_result;
 var email;
 var username;
+var uid;
 //------------------------------------------------------------------------------//
 //fb_login()
 function fb_login() {
@@ -25,7 +26,7 @@ async function parseLoginData(result) {
         return;
     }
     username = login_result.additionalUserInfo.profile.name;
-
+    uid = login_result.user.uid;
     email = login_result.user.email;
 }
 //------------------------------------------------------------------------------//

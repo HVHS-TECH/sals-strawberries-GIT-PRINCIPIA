@@ -24,31 +24,34 @@
   <script src="./scripts/core/main.js"></script>
 </head>
 <body>
-  <div class="container" id="delete_on_submit">
+  <div class="container">
     <h1>Sal’s Strawberry Saloon</h1>
     <h2>(and other fruit products)</h2>
 
-    <button onclick="fb_login()">Login with Google</button>
+    <div id="delete_on_submit">
+      <button onclick="fb_login()">Login with Google</button>
 
-    <form id="fruitForm">
-      <label for="name">Your Name:</label>
-      <input type="text" id="name" name="name" required />
+      <form id="fruitForm">
+        <label for="name">Your Name:</label>
+        <input type="text" id="name" name="name" required />
 
-      <label for="favouriteFruit">Favorite Fruit:</label>
-      <input type="text" id="favouriteFruit" name="favouriteFruit" required />
+        <label for="favouriteFruit">Favorite Fruit:</label>
+        <input type="text" id="favouriteFruit" name="favouriteFruit" required />
 
-      <label for="fruitQuantity">How many servings per week?</label>
-      <input type="number" id="fruitQuantity" name="fruitQuantity" required />
+        <label for="fruitQuantity">How many servings per week?</label>
+        <input type="number" id="fruitQuantity" name="fruitQuantity" required />
 
-      <!-- add more fields here -->
-    </form>
+        <!-- add more fields here -->
+      </form>
 
-    <button onclick="submit()">Submit</button>
+      <button onclick="submit()">Submit</button>
 
-    <p id="statusMessage"></p>
+      <p id="statusMessage"></p>
+    </div>
+    <div id="thanks_for_answering">
+      <h3>Thanks for answering!</h3>
+    </div>
   </div>
-  <div class="container" id="thanks_for_answering">
-
-  </div>
+  
 </body>
 </html>

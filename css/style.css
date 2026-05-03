@@ -27,6 +27,12 @@ h2 {
   margin-top: 0.2rem;
 }
 
+h3 {
+  color: #8b0000;
+  font-size: 0.8rem;
+  margin-top: 0.2rem;
+}
+
 label {
   display: block;
   margin-top: 1rem;
