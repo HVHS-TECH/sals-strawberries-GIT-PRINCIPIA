@@ -23,7 +23,7 @@ function submit() {
 
     html_delete_on_submit.remove();
 
-    html_thanks_for_answering.style.display = "flex";
+    html_thanks_for_answering.style.display = "block";
 
 }
 //------------------------------------------------------------------------------//
