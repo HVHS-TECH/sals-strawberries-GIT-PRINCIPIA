@@ -69,8 +69,8 @@ function updateAdminData(read) {
     for (var i = 0; i < Math.min(5, combined.length); i++) {
         var aveQuantity = 0;
         for (var j = 0; j < combined[i].allQnties.length; j++) {
-            const QNTY = combined[i].allQnties[i];
-            aveQuantity += QNTY;
+            const QNTY = combined[i].allQnties[j];
+            aveQuantity += Number(QNTY);
         }
         aveQuantity /= j;
 
