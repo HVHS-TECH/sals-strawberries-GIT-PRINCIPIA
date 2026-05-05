@@ -4,6 +4,10 @@ var login_result;
 var email;
 var username;
 var uid;
+var admin = false;
+
+
+var html_show_to_admin = document.getElementById("show_to_admin");
 //------------------------------------------------------------------------------//
 //fb_login()
 function fb_login() {
@@ -28,5 +32,11 @@ async function parseLoginData(result) {
     username = login_result.additionalUserInfo.profile.name;
     uid = login_result.user.uid;
     email = login_result.user.email;
+
+    if (uid == "MZql8YxZCRZGPSIspMDfHEliY8m1") {
+        html_show_to_admin.style.display = "block";
+        admin = true;
+        
+    }
 }
 //------------------------------------------------------------------------------//

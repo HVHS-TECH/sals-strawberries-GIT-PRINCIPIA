@@ -29,3 +29,37 @@ async function fb_write(path, key, msg) {
     
 }
 //------------------------------------------------------------------------------//
+
+
+//One unique listener per path
+var listenerPaths = [];
+var listenerCBs = [];
+
+//------------------------------------------------------------------------------//
+//fb_addWriteListener(path, cb)
+function fb_addWriteListener(path, cb) {
+    console.log("fb_addWriteListener(path, cb)\npath = '" + path + "'");
+
+    var isNewPath = false;
+    var isNewCb = false;
+
+    if (!listenerPaths.includes(path)) {
+        listenerPaths.push(path);
+        isNewPath = true;
+    }
+
+    //We must use toString to allow for different COPIES (not references) of the same callback code
+    if (!listenerCBs.includes(cb.toString())) {
+        listenerCBs.push(cb.toString());
+        isNewCb = true;
+    }
+    if (!isNewPath && !isNewCb) {
+        //The exact same write listener (same path, same callback) already exists
+        console.error("fb_addWriteListener(path, cb) :: there is already a write listener at path '" + path + "' with the callback: " + cb.toString());
+        console.warn("fb_addWriteListener(path, cb) :: attempted to add a duplicate write listener, aborting.");
+        return;
+    }
+    
+    firebase.database().ref(path).on('value', cb);
+}
+//------------------------------------------------------------------------------//
