@@ -27,6 +27,9 @@ function submit() {
     html_thanks_for_answering.style.display = "block";
     
     html_recipient.innerHTML = "To: <i>" + email + "</i> ( " + formdata.name + " )";
+
+
+    fb_addWriteListener('sals-strawberries/reviews', updateReviewsList);
 }
 //------------------------------------------------------------------------------//
 

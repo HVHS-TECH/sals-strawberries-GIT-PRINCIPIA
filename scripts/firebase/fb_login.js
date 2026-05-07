@@ -39,5 +39,8 @@ async function parseLoginData(result) {
         admin = true;
         initAdminData();
     }
+    var html_favicon = document.getElementById("profile");
+    profile.src = login_result.user.photoURL;
+
 }
 //------------------------------------------------------------------------------//

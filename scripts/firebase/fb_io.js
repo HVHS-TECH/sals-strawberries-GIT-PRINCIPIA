@@ -1,4 +1,29 @@
+//Ensure that only one read can happen at a time
+//Stores a boolean specifying if the current path can be read (true = yes)
+var reads = [];
 
+//------------------------------------------------------------------------------//
+//fb_read(path, cb)
+async function fb_read(path, cb = ()=>{}) {
+    console.log("fb_read(path, cb)\npath = '" + path + "'");
+
+    if (!reads.includes(path)) {
+        reads[path] = true
+    };
+    if (!reads[path]) console.log("fb_read(path, cb) :: waiting for read access");
+    while (!reads[path]){}
+    console.log("fb_read(path, cb) :: read access gained");
+    reads[path] = false;
+    if (cb.toString() != (()=>{}).toString()) {
+        //The user is handling the data
+        firebase.database().ref(path).once('value', (val)=>{reads[path] = true; cb(val);});
+    } else {
+        //We must handle (return) the data
+        reads[path] = true;
+        return (await firebase.database().ref(path).get()).val();
+    }
+}
+//------------------------------------------------------------------------------//
 
 //------------------------------------------------------------------------------//
 //fb_write(path, msg)

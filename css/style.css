@@ -15,6 +15,10 @@ body {
   border: solid 5px #d8aebd;
 }
 
+.row {
+  display: flex;
+  flex-direction: row;
+}
 
 h1 {
   color: pink;
