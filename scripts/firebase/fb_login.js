@@ -41,6 +41,7 @@ async function parseLoginData(result) {
     }
     var html_favicon = document.getElementById("profile");
     profile.src = login_result.user.photoURL;
+    profile.style.display = "flex";
 
 }
 //------------------------------------------------------------------------------//

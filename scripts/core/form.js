@@ -21,6 +21,7 @@ function submit() {
     var html_thanks_for_answering = document.getElementById("thanks_for_answering");
     var html_delete_on_submit = document.getElementById("delete_on_submit");
     var html_recipient = document.getElementById("recipient");
+    
 
     html_delete_on_submit.remove();
 
