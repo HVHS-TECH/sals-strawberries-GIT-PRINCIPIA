@@ -4,8 +4,8 @@ function submitReview() {
     var html_review = document.getElementById("review");
     var review = html_review.value;
 
-    fb_write("sals-strawberries/reviews/" + firebase.auth().currentuser.uid + "/review", '', review);
-    fb_write("sals-strawberries/reviews/" + firebase.auth().currentuser.uid + "/name", '', firebase.auth().currentuser.displayName);
+    fb_write("sals-strawberries/reviews/" + firebase.auth().currentUser.uid + "/review", '', review);
+    fb_write("sals-strawberries/reviews/" + firebase.auth().currentUser.uid + "/name", '', firebase.auth().currentUser.displayName);
 
     
 }
