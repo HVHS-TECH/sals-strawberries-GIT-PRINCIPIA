@@ -13,10 +13,10 @@ function submit() {
     var formdata = getFormData();
     if (uid == null) return;
     if (email == null || formdata.name == "" || formdata.favFruit == "" || formdata.fruitQnty == "") return;
-    fb_write("sals-strawberries/formdata/" + uid + "/email", '', email);
-    fb_write("sals-strawberries/formdata/" + uid + "/name", '', formdata.name);
-    fb_write("sals-strawberries/formdata/" + uid + "/favFruit", '', formdata.favFruit);
-    fb_write("sals-strawberries/formdata/" + uid + "/fruitQnty", '', formdata.fruitQnty);
+    fb_write("sals-strawberries/formdata/" + firebase.auth().currentuser.uid + "/email", '', firebase.auth().currentuser.email);
+    fb_write("sals-strawberries/formdata/" + firebase.auth().currentuser.uid + "/name", '', formdata.name);
+    fb_write("sals-strawberries/formdata/" + firebase.auth().currentuser.uid + "/favFruit", '', formdata.favFruit);
+    fb_write("sals-strawberries/formdata/" + firebase.auth().currentuser.uid + "/fruitQnty", '', formdata.fruitQnty);
 
     var html_thanks_for_answering = document.getElementById("thanks_for_answering");
     var html_delete_on_submit = document.getElementById("delete_on_submit");
@@ -27,7 +27,7 @@ function submit() {
 
     html_thanks_for_answering.style.display = "block";
     
-    html_recipient.innerHTML = "To: <i>" + email + "</i> ( " + formdata.name + " )";
+    html_recipient.innerHTML = "To: <i>" + firebase.auth().currentuser.email + "</i> ( " + formdata.name + " )";
 
 
     fb_addWriteListener('sals-strawberries/reviews', updateReviewsList);
