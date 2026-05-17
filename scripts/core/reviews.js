@@ -20,12 +20,11 @@ async function updateReviewsList() {
     var reviews = await fb_read('sals-strawberries/reviews/');
 
     const KEYS = Object.keys(reviews);
-
     //Reset reviews list
     html_reviews.innerHTML = "";
 
     for (var i = 0; i < KEYS.length; i++) {
-        const VAL = reviews[KEYS];
+        const VAL = reviews[KEYS[i]];
         const NAME = VAL.name;
         const REVIEW = VAL.review;
         html_reviews.innerHTML += "<h3>" + NAME + " says: </h3>";

@@ -4,6 +4,7 @@ main();
 //main()
 function main() {
     fb_init();
+    addEventListener("load", updateReviewsList);
 }
 //------------------------------------------------------------------------------//
 
