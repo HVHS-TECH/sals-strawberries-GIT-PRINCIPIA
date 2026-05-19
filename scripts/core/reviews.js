@@ -4,8 +4,11 @@ function submitReview() {
     var html_review = document.getElementById("review");
     var review = html_review.value;
     const MAX_LENGTH = 500;
-    fb_write("sals-strawberries/reviews/" + firebase.auth().currentUser.uid + "/review", '', review.slice(0, MAX_LENGTH));
-    fb_write("sals-strawberries/reviews/" + firebase.auth().currentUser.uid + "/name", '', firebase.auth().currentUser.displayName);
+    if (handleSecurity(review)) {
+        fb_write("sals-strawberries/reviews/" + firebase.auth().currentUser.uid + "/review", '', review.slice(0, MAX_LENGTH));
+        fb_write("sals-strawberries/reviews/" + firebase.auth().currentUser.uid + "/name", '', firebase.auth().currentUser.displayName);
+    }
+    
 
     
 }
