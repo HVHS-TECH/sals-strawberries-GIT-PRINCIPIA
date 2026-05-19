@@ -51,6 +51,7 @@ input {
   border-radius: 6px;
 }
 
+
 button {
   margin-top: 1.5rem;
   padding: 0.7rem 1.2rem;
@@ -74,4 +75,9 @@ button:hover {
 
 #thanks_for_answering {
   display: none;
+}
+
+p {
+  word-break: break-all;
+  width:90%;
 }
