@@ -4,7 +4,6 @@ main();
 //main()
 async function main() {
     fb_init();
-    await checkBan();
     addEventListener("load", updateReviewsList);
 }
 //------------------------------------------------------------------------------//
