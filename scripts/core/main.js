@@ -4,6 +4,7 @@ main();
 //main()
 function main() {
     fb_init();
+    await checkBan();
     addEventListener("load", updateReviewsList);
 }
 //------------------------------------------------------------------------------//
