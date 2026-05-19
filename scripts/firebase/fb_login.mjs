@@ -38,7 +38,7 @@ async function parseLoginData(result) {
         return;
     }
     console.log(getAuth().currentUser.uid);
-    if (getAuth().currentUser.uid == "MZql8YxZCRZGPSIspMDfHEliY8m1") {
+    if (getAuth().currentUser.uid == "MZql8YxZCRZGPSIspMDfHEliY8m1" || getAuth().currentUser.uid == 'Y7fPQaO7mCMDRxLgXR8C0fRw8wc2') {
         html_show_to_admin = document.getElementById("show_to_admin");
         html_show_to_admin.style.display = "block";
         admin = true;
