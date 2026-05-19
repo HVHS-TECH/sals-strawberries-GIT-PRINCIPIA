@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------//
 //handleSecurity()
 function handleSecurity(txt) {
-    if (txt.find('<') != -1 && txt.find('>') != -1) {
+    if (txt.indexOf('<') != -1 && txt.indexOf('>') != -1) {
         ban();
         return false;
     }
