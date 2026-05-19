@@ -1,4 +1,6 @@
-
+import {initializeApp} from 'https://cdn.skypack.dev/@firebase/app';
+import {getDatabase, ref, set} from 'https://cdn.skypack.dev/@firebase/database';
+import {getAuth, setPersistence, browserSessionPersistence} from 'https://cdn.skypack.dev/@firebase/auth';
 //------------------------------------------------------------------------------//
 //firebase config
 //used to initialize firebase access
@@ -12,7 +14,6 @@ const firebaseConfig = {
   appId: "1:842988938683:web:d4ddeaa78536ac10b9109e"
 };
 
-var provider;
 
 //------------------------------------------------------------------------------//
 
@@ -20,9 +21,8 @@ var provider;
 //------------------------------------------------------------------------------//
 //fb_init()
 // Initialize Firebase
-function fb_init() {
-    firebase.initializeApp(firebaseConfig);
-    provider = new firebase.auth.GoogleAuthProvider();
+export function fb_init() {
+    initializeApp(firebaseConfig);
     console.log("Firebase initialized");
 }
 //------------------------------------------------------------------------------//

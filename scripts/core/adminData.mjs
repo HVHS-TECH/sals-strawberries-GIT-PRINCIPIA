@@ -1,9 +1,9 @@
-
+import { fb_addWriteListener } from "../firebase/fb_io.mjs";
 var html_fav_fruits_list = document.getElementById("fav_fruits_list");
 
 //------------------------------------------------------------------------------//
 //initAdminData()
-function initAdminData() {
+export function initAdminData() {
     html_fav_fruits_list = document.getElementById("fav_fruits_list");
     fb_addWriteListener("sals-strawberries/formdata/", updateAdminData);
 }

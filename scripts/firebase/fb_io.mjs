@@ -1,26 +1,31 @@
+import {initializeApp} from 'https://cdn.skypack.dev/@firebase/app';
+import {getDatabase, ref, get, set, onValue} from 'https://cdn.skypack.dev/@firebase/database';
+
+
 //Ensure that only one read can happen at a time
 //Stores a boolean specifying if the current path can be read (true = yes)
 var reads = [];
 
 //------------------------------------------------------------------------------//
 //fb_read(path, cb)
-async function fb_read(path, cb = ()=>{}) {
-    console.log("fb_read(path, cb)\npath = '" + path + "'");
+    
+export async function fb_read(path, cb = ()=>{}) {
+    console.log("read(path, cb)\npath = '" + path + "'");
 
     if (!reads.includes(path)) {
         reads[path] = true
     };
-    if (!reads[path]) console.log("fb_read(path, cb) :: waiting for read access");
+    if (!reads[path]) console.log("read(path, cb) :: waiting for read access");
     while (!reads[path]){}
-    console.log("fb_read(path, cb) :: read access gained");
+    console.log("read(path, cb) :: read access gained");
     reads[path] = false;
     if (cb.toString() != (()=>{}).toString()) {
         //The user is handling the data
-        firebase.database().ref(path).once('value', (val)=>{reads[path] = true; cb(val);});
+        get(ref(getDatabase(), path)).then((val)=>{reads[path] = true; cb(val);});
     } else {
         //We must handle (return) the data
         reads[path] = true;
-        return (await firebase.database().ref(path).get()).val();
+        return (await get(ref(getDatabase(), path))).val(); 
     }
 }
 //------------------------------------------------------------------------------//
@@ -30,26 +35,26 @@ async function fb_read(path, cb = ()=>{}) {
 //path: the path to write to
 //key: the key to the message
 //msg: the message to write
-async function fb_write(path, key, msg) {
-    console.log("fb_write(path, msg)\npath = '" + path + "'\nmsg = " + msg);
+export async function fb_write(path, key, msg){
+    console.log("write(path, msg)\npath = '" + path + "'\nmsg = " + msg);
 
     //Avoid writing to database root and deleting everything
     if (path == "/") {
-        console.error("fb_write(path, msg) :: attempted to write " + msg + " to the database root.");
-        console.warn("fb_write(path, msg) :: attempted to write to database root, aborting");
+        console.error("FB::write(path, msg) :: attempted to write " + msg + " to the database root.");
+        console.warn("FB::write(path, msg) :: attempted to write to database root, aborting");
         return;
     }
 
     if (key == "") {
         //We are just writing a value to a list
-        firebase.database().ref(path).set(msg);
+        set(ref(getDatabase(), path), msg);
         return;
     } else {
         //We are writing a value with an explicitly defined key
         const JSON_STRING = '{"' + key + '": "' + msg + '"}';
         const JSON_OBJECT = JSON.parse(JSON_STRING);
         
-        firebase.database().ref(path + "/" + key).set(JSON_OBJECT);
+        set(ref(getDatabase(), path + "/" + key), JSON_OBJECT);
     }
     
 }
@@ -62,7 +67,7 @@ var listenerCBs = [];
 
 //------------------------------------------------------------------------------//
 //fb_addWriteListener(path, cb)
-function fb_addWriteListener(path, cb) {
+export function fb_addWriteListener(path, cb) {
     console.log("fb_addWriteListener(path, cb)\npath = '" + path + "'");
 
     var isNewPath = false;
@@ -85,6 +90,6 @@ function fb_addWriteListener(path, cb) {
         return;
     }
     
-    firebase.database().ref(path).on('value', cb);
+    onValue(ref(getDatabase(), path), cb);
 }
 //------------------------------------------------------------------------------//

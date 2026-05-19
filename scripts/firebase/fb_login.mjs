@@ -1,4 +1,10 @@
+import { handleSecurity } from "../core/security.mjs";
+import {initializeApp} from 'https://cdn.skypack.dev/@firebase/app';
+import {getDatabase, ref, get, set, onValue} from 'https://cdn.skypack.dev/@firebase/database';
+import {getAuth, GoogleAuthProvider, signInWithPopup} from 'https://cdn.skypack.dev/@firebase/auth';
 
+import {initAdminData} from '../core/adminData.mjs';
+import { checkBan } from "../core/security.mjs";
 
 var login_result;
 var email;
@@ -8,11 +14,12 @@ var admin = false;
 
 
 var html_show_to_admin = document.getElementById("show_to_admin");
+
 //------------------------------------------------------------------------------//
 //fb_login()
-function fb_login() {
+export function fb_login() {
     console.log("fb_login() :: signing in!");
-    firebase.auth().signInWithPopup(provider)
+    signInWithPopup(getAuth(), new GoogleAuthProvider())
     .then((result) => {
         parseLoginData(result);
     });
@@ -25,23 +32,20 @@ function fb_login() {
 //result: the result of the login
 async function parseLoginData(result) {
     await checkBan();
-    login_result = result;
-    if (login_result == null) {
+    
+    if (getAuth().currentUser == null) {
         console.warn("parseLoginData()::the user has not logged in successfully yet!");
         return;
     }
-    username = login_result.additionalUserInfo.profile.name;
-    uid = login_result.user.uid;
-    email = login_result.user.email;
-    console.log(uid);
-    if (uid == "MZql8YxZCRZGPSIspMDfHEliY8m1") {
+    console.log(getAuth().currentUser.uid);
+    if (getAuth().currentUser.uid == "MZql8YxZCRZGPSIspMDfHEliY8m1") {
         html_show_to_admin = document.getElementById("show_to_admin");
         html_show_to_admin.style.display = "block";
         admin = true;
         initAdminData();
     }
     var html_favicon = document.getElementById("profile");
-    profile.src = login_result.user.photoURL;
+    profile.src = getAuth().currentUser.photoURL;
     profile.style.display = "flex";
 
 }
