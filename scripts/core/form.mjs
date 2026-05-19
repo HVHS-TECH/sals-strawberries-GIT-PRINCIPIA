@@ -1,4 +1,4 @@
-import { handleSecurity } from "./security.mjs";
+import { checkBan, handleSecurity } from "./security.mjs";
 import {initializeApp} from 'https://cdn.skypack.dev/@firebase/app';
 import {getDatabase, ref, get, set, onValue} from 'https://cdn.skypack.dev/@firebase/database';
 import {getAuth} from 'https://cdn.skypack.dev/@firebase/auth';
@@ -19,6 +19,17 @@ export function submit() {
     var formdata = getFormData();
     if (getAuth().currentUser.uid == null) return;
     if (getAuth().currentUser.email == null || formdata.name == "" || formdata.favFruit == "" || formdata.fruitQnty == "") return;
+    
+    if (
+        handleSecurity(formdata.name) ||
+        handleSecurity(formdata.favFruit) ||
+        handleSecurity(formdata.fruitQnty)
+    ) {
+        return;
+    }
+
+    
+    
     fb_write("sals-strawberries/formdata/" + getAuth().currentUser.uid + "/email", '', getAuth().currentUser.email);
     fb_write("sals-strawberries/formdata/" + getAuth().currentUser.uid + "/name", '', formdata.name);
     fb_write("sals-strawberries/formdata/" + getAuth().currentUser.uid + "/favFruit", '', formdata.favFruit);

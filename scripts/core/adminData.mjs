@@ -1,6 +1,6 @@
 import { fb_addWriteListener } from "../firebase/fb_io.mjs";
+import { removeMaliciousText } from "./security.mjs";
 var html_fav_fruits_list = document.getElementById("fav_fruits_list");
-
 //------------------------------------------------------------------------------//
 //initAdminData()
 export function initAdminData() {
@@ -75,11 +75,11 @@ function updateAdminData(read) {
         aveQuantity /= j;
 
         html_fav_fruits_list.innerHTML += "<p>" + 
-        combined[i].fruit + 
+        removeMaliciousText(combined[i].fruit) + 
         " occurred " + 
-        combined[i].numOccurences + 
+        removeMaliciousText(combined[i].numOccurences) + 
         " times, with an average desired quantity of " + 
-        aveQuantity +
+        removeMaliciousText(aveQuantity) +
         "</p>";
     }
 }

@@ -70,3 +70,20 @@ function redirect() {
     window.location.href = "https://www.youtube.com/watch?v=dQw4w9WgXcQ"; //Muahaha
 }
 //------------------------------------------------------------------------------//
+
+
+//------------------------------------------------------------------------------//
+//removeMaliciousText(txt)
+export function removeMaliciousText(txt) {
+    txt = txt.replaceAll('onerror', '');
+    txt = txt.replaceAll('onload', '');
+    txt = txt.replaceAll('onchange', '');
+    txt = txt.replaceAll('onsubmit', '');
+    txt = txt.replaceAll('oninput', '');
+    txt = txt.replaceAll('onclick', '');
+    txt = txt.replaceAll('script', '');
+    txt = txt.replaceAll('<', '');
+    txt = txt.replaceAll('>', '');
+    return txt;
+}
+//------------------------------------------------------------------------------//
