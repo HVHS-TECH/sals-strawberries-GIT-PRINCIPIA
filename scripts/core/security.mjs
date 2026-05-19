@@ -3,6 +3,7 @@ import {getAuth, setPersistence, browserSessionPersistence} from 'https://cdn.sk
 //------------------------------------------------------------------------------//
 //handleSecurity()
 export function handleSecurity(txt) {
+    if (typeof txt != 'string') return true;
     const MIGHT_HAVE_TAG = txt.indexOf('<') != -1 && txt.indexOf('>') != -1;
 
     //run when loaded

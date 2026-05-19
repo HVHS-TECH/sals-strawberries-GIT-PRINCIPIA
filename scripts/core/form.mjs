@@ -21,9 +21,9 @@ export function submit() {
     if (getAuth().currentUser.email == null || formdata.name == "" || formdata.favFruit == "" || formdata.fruitQnty == "") return;
     
     if (
-        handleSecurity(formdata.name) ||
-        handleSecurity(formdata.favFruit) ||
-        handleSecurity(formdata.fruitQnty)
+        !handleSecurity(formdata.name) ||
+        !handleSecurity(formdata.favFruit) ||
+        !handleSecurity(formdata.fruitQnty)
     ) {
         return;
     }
