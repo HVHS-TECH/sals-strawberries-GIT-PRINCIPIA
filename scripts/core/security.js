@@ -21,6 +21,7 @@ function ban() {
 //checkBan()
 async function checkBan() {
     const READ = await fb_read('sals-strawberries/bans/' + firebase.auth().currentUser.uid);
+    if (READ == null) return;
     if (READ.val()) {
         redirect();
     }
