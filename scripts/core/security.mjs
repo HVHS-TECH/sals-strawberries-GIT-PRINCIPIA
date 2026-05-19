@@ -76,6 +76,7 @@ function redirect() {
 //------------------------------------------------------------------------------//
 //removeMaliciousText(txt)
 export function removeMaliciousText(txt) {
+    if (typeof txt != 'string') return true;
     txt = txt.replaceAll('onerror', '');
     txt = txt.replaceAll('onload', '');
     txt = txt.replaceAll('onchange', '');

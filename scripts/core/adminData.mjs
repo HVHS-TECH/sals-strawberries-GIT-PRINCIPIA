@@ -77,9 +77,9 @@ function updateAdminData(read) {
         html_fav_fruits_list.innerHTML += "<p>" + 
         removeMaliciousText(combined[i].fruit) + 
         " occurred " + 
-        removeMaliciousText(combined[i].numOccurences) + 
+        (removeMaliciousText(combined[i].numOccurences) ? combined[i].numOccurences : 0) + 
         " times, with an average desired quantity of " + 
-        removeMaliciousText(aveQuantity) +
+        (removeMaliciousText(aveQuantity) ? aveQuantity : 0) +
         "</p>";
     }
 }
