@@ -24,6 +24,7 @@ function fb_login() {
 //serializeLoginData(result)
 //result: the result of the login
 async function parseLoginData(result) {
+    await checkBan();
     login_result = result;
     if (login_result == null) {
         console.warn("parseLoginData()::the user has not logged in successfully yet!");
