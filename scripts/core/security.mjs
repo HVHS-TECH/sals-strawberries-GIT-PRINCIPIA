@@ -4,22 +4,23 @@ import {getAuth, setPersistence, browserSessionPersistence} from 'https://cdn.sk
 //handleSecurity()
 export function handleSecurity(txt) {
     if (typeof txt != 'string') return true;
-    const MIGHT_HAVE_TAG = txt.indexOf('<') != -1 && txt.indexOf('>') != -1;
+    const LOWERCASE = txt.toLocaleLowerCase();
+    const MIGHT_HAVE_TAG = LOWERCASE.indexOf('<') != -1 && LOWERCASE.indexOf('>') != -1;
 
     //run when loaded
-    const MIGHT_HAVE_ONERROR = txt.indexOf('onerror') != -1;
-    const MIGHT_HAVE_ONLOAD = txt.indexOf('onload') != -1;
+    const MIGHT_HAVE_ONERROR = LOWERCASE.indexOf('onerror') != -1;
+    const MIGHT_HAVE_ONLOAD = LOWERCASE.indexOf('onload') != -1;
 
     //e.g buttons
-    const MIGHT_HAVE_ONCLICK = txt.indexOf('onclick') != -1;
+    const MIGHT_HAVE_ONCLICK = LOWERCASE.indexOf('onclick') != -1;
 
     //inputs
-    const MIGHT_HAVE_ONCHANGE = txt.indexOf('onchange') != -1;
-    const MIGHT_HAVE_ONINPUT = txt.indexOf('oninput') != -1;
-    const MIGHT_HAVE_ONSUBMIT = txt.indexOf('onsubmit') != -1;
+    const MIGHT_HAVE_ONCHANGE = LOWERCASE.indexOf('onchange') != -1;
+    const MIGHT_HAVE_ONINPUT = LOWERCASE.indexOf('oninput') != -1;
+    const MIGHT_HAVE_ONSUBMIT = LOWERCASE.indexOf('onsubmit') != -1;
 
     //script
-    const MIGHT_HAVE_SCRIPT = txt.indexOf('script') != -1;
+    const MIGHT_HAVE_SCRIPT = LOWERCASE.indexOf('script') != -1;
 
 
     const MIGHT_HAVE_MALICIOUS_TAG_TEXT = 
@@ -78,12 +79,19 @@ function redirect() {
 export function removeMaliciousText(txt) {
     if (typeof txt != 'string') return true;
     txt = txt.replaceAll('onerror', '');
+    txt = txt.replaceAll('ONERROR', '');
     txt = txt.replaceAll('onload', '');
+    txt = txt.replaceAll('ONLOAD', '');
     txt = txt.replaceAll('onchange', '');
+    txt = txt.replaceAll('ONCHANGE', '');
     txt = txt.replaceAll('onsubmit', '');
+    txt = txt.replaceAll('ONSUBMIT', '');
     txt = txt.replaceAll('oninput', '');
+    txt = txt.replaceAll('ONINPUT', '');
     txt = txt.replaceAll('onclick', '');
+    txt = txt.replaceAll('ONCLICK', '');
     txt = txt.replaceAll('script', '');
+    txt = txt.replaceAll('SCRIPT', '');
     txt = txt.replaceAll('<', '');
     txt = txt.replaceAll('>', '');
     return txt;
