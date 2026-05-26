@@ -2,7 +2,7 @@ import { fb_write, fb_read } from "../firebase/fb_io.mjs";
 import {getAuth, setPersistence, browserSessionPersistence} from 'https://cdn.skypack.dev/@firebase/auth';
 //------------------------------------------------------------------------------//
 //handleSecurity()
-export function handleSecurity(txt) {
+export function handleSecurity(txt, doBan) {
     if (typeof txt != 'string') return true;
     const LOWERCASE = txt.toLocaleLowerCase();
     const MIGHT_HAVE_TAG = LOWERCASE.indexOf('<') != -1 && LOWERCASE.indexOf('>') != -1;
@@ -35,7 +35,7 @@ export function handleSecurity(txt) {
     const MIGHT_HAVE_MALICIOUS_TAG = MIGHT_HAVE_MALICIOUS_TAG_TEXT && MIGHT_HAVE_TAG;
 
     if (MIGHT_HAVE_MALICIOUS_TAG) {
-        ban();
+        if (doBan) ban();
         return false;
     }
     return true;
@@ -69,7 +69,7 @@ export async function checkBan() {
 //------------------------------------------------------------------------------//
 //redirect()
 function redirect() {
-    window.location.href = "https://www.youtube.com/watch?v=dQw4w9WgXcQ"; //Muahaha
+    //window.location.href = "https://www.youtube.com/watch?v=dQw4w9WgXcQ"; //Muahaha
 }
 //------------------------------------------------------------------------------//
 
@@ -78,7 +78,7 @@ function redirect() {
 //removeMaliciousText(txt)
 export function removeMaliciousText(txt) {
     if (typeof txt != 'string') return true;
-    if (handleSecurity(txt)) {return txt;}
+    if (handleSecurity(txt, false)) {return txt;}
     txt = txt.replaceAll('onerror', '');
     txt = txt.replaceAll('ONERROR', '');
     txt = txt.replaceAll('onload', '');
